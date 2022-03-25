@@ -82,7 +82,7 @@ def DoDivertPowerAccept():
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,960,550)
     sleep(0.01)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,960,550)
-    sleep(0.02)
+    sleep(0.03)
     keyboard.press_and_release("esc")
     
 def CheckDivertPowerAccept():
@@ -93,7 +93,7 @@ def CheckDivertPowerAccept():
 
 #region main
 sleep(1)
-while keyboard.is_pressed("o") != True:
+while keyboard.is_pressed("0") != True:
     sleep(0.01)
     if CheckWires():
         DoWires()

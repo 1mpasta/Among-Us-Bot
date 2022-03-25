@@ -1,3 +1,4 @@
+from distutils.debug import DEBUG
 from time import sleep
 import keyboard
 import pyautogui
@@ -91,6 +92,23 @@ def CheckDivertPowerAccept():
     return False
 #endregion
 
+#region stabilizeSteering
+def DoStabilizeSteering():
+    win32api.SetCursorPos((960,540))
+    sleep(0.01)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,960,540)
+    sleep(0.01)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,960,540)
+    sleep(0.01)
+    keyboard.press_and_release("esc")
+
+def CheckStabilizeSteering():
+    if pyautogui.pixelMatchesColor(960, 140, (14, 63, 95)):
+        return True
+    return False
+
+#endregion
+
 #region main
 sleep(1)
 while keyboard.is_pressed("0") != True:
@@ -99,4 +117,6 @@ while keyboard.is_pressed("0") != True:
         DoWires()
     if CheckDivertPowerAccept():
         DoDivertPowerAccept()
+    if CheckStabilizeSteering():
+        DoStabilizeSteering()
 #endregion

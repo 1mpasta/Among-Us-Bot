@@ -108,6 +108,21 @@ def CheckStabilizeSteering():
 
 #endregion
 
+#region download/upload
+def DoDownload():
+    win32api.SetCursorPos((960,660))
+    sleep(0.01)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,960,660)
+    sleep(0.01)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,960,660)
+    sleep(0.5)
+    
+def CheckDownload():
+    if pyautogui.pixelMatchesColor(1447, 222, (78, 112, 148)):
+        return True
+    return False
+#endregion
+
 #region main
 sleep(1)
 while keyboard.is_pressed("0") != True:
@@ -118,4 +133,6 @@ while keyboard.is_pressed("0") != True:
         DoDivertPowerAccept()
     if CheckStabilizeSteering():
         DoStabilizeSteering()
+    if CheckDownload():
+        DoDownload()
 #endregion

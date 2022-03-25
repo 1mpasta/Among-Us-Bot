@@ -1,4 +1,3 @@
-from distutils.debug import DEBUG
 from time import sleep
 import keyboard
 import pyautogui

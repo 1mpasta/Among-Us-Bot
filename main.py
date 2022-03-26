@@ -147,13 +147,15 @@ def DoReactor():
                 rgb = pic.getpixel((x*115, y*115))
                 if rgb == (68, 168, 255):
                     sequence.append((x, y))
-                    sleep(0.2)
-
+                    sleep(0.25)
+    sleep(0.01)
+    print(sequence)
     for i in sequence:
-        win32api.SetCursorPos((1135+(i[0]*125), 475+(i[1]*125)))
         sleep(0.01)
+        win32api.SetCursorPos((1135+(i[0]*125), 475+(i[1]*125)))
+        sleep(0.02)
         Click()
-        sleep(0.1)
+        sleep(0.2)
     
 def CheckReactor():
     if pyautogui.pixelMatchesColor(1552, 244, (66, 65, 66)):

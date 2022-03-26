@@ -4,6 +4,11 @@ import pyautogui
 import win32api
 import win32con
 
+def Click(delay = 0.01):
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
+    sleep(delay)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+
 #region wires
 left = 565
 right = 1325
@@ -51,8 +56,7 @@ def ConnectWires():
         sleep(0.02)
         win32api.SetCursorPos((left, wiresYPositons[i]))
         sleep(0.02)
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,
-                             left, wiresYPositons[i])
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,left, wiresYPositons[i])
         sleep(0.02)
         win32api.SetCursorPos((right, wiresYPositons[wire]))
         sleep(0.02)
@@ -79,9 +83,7 @@ def CheckWires():
 def DoDivertPowerAccept():
     win32api.SetCursorPos((960,550))
     sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,960,550)
-    sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,960,550)
+    Click()
     sleep(0.03)
     keyboard.press_and_release("esc")
     
@@ -95,9 +97,7 @@ def CheckDivertPowerAccept():
 def DoStabilizeSteering():
     win32api.SetCursorPos((960,540))
     sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,960,540)
-    sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,960,540)
+    Click()
     sleep(0.01)
     keyboard.press_and_release("esc")
 
@@ -112,9 +112,7 @@ def CheckStabilizeSteering():
 def DoDownload():
     win32api.SetCursorPos((960,660))
     sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,960,660)
-    sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,960,660)
+    Click()
     sleep(0.5)
     
 def CheckDownload():

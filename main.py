@@ -1,4 +1,3 @@
-from msilib import sequence
 from time import sleep
 import keyboard
 import pyautogui

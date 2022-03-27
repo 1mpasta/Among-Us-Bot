@@ -9,11 +9,6 @@ from stabilizeSteering import StabilizeSteering
 from wires import Wires
 from acceptDivertedPower import DivertPowerAccept
 
-def Click(delay=0.01):
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-    sleep(delay)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
-
 wires = Wires()
 divertPower = DivertPowerAccept()
 stabilizeSteering = StabilizeSteering()

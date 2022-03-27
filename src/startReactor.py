@@ -18,7 +18,6 @@ class StartReactor(Task):
                         self.sequence.append((x, y))
                         sleep(0.25)
         sleep(0.01)
-        print(self.sequence)
         for i in self.sequence:
             sleep(0.01)
             win32api.SetCursorPos((1135+(i[0]*125), 475+(i[1]*125)))

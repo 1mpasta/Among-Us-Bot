@@ -6,9 +6,11 @@ import win32api
 import cv2 as cv
 import numpy as np
 
+from vision import Vision
+
 class UnlockManifolds(Task):
 
-    # detection area x1 575 y1 385 x2 1340 y2 690 w765 h305
+    vision = Vision()
     
     def DoTask(self):
         screenshot = pyautogui.screenshot(region=(575,385,765,305))
@@ -17,12 +19,9 @@ class UnlockManifolds(Task):
         
             screenshot = np.array(screenshot)
             screenshot = cv.cvtColor(screenshot, cv.COLOR_RGB2BGR)
-        
-            result = cv.matchTemplate(screenshot, number, cv.TM_CCOEFF_NORMED)
-
-            min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-
-            clickPoint = (max_loc[0] + 26 + 575, max_loc[1] + 35 + 385)
+            
+            clickPoint = self.vision.GetLocationFromPicture(number, screenshot)
+            clickPoint = (clickPoint[0]+575,clickPoint[1]+385)
         
             win32api.SetCursorPos(clickPoint)
             sleep(0.01)

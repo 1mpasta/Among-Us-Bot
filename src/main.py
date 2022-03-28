@@ -1,7 +1,7 @@
 from time import sleep
 import keyboard
-import win32api, win32con
 
+from divertPower import DivertPower
 from download import Download
 from unlockManifolds import UnlockManifolds
 from startReactor import StartReactor
@@ -10,11 +10,12 @@ from wires import Wires
 from acceptDivertedPower import DivertPowerAccept
 
 wires = Wires()
-divertPower = DivertPowerAccept()
+divertPowerAccept = DivertPowerAccept()
 stabilizeSteering = StabilizeSteering()
 download = Download()
 reactor = StartReactor()
 manifolds = UnlockManifolds()
+divertPower = DivertPower()
 
 # region main
 sleep(1)
@@ -32,4 +33,6 @@ while keyboard.is_pressed("0") != True:
         reactor.DoTask()
     if manifolds.CheckTask():
         manifolds.DoTask()
+    if divertPowerAccept.CheckTask():
+        divertPowerAccept.DoTask()
 # endregion

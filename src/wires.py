@@ -44,7 +44,6 @@ class Wires(Task):
                     break
         if len(self.wireColors) < 4:
             print("ERROR: wires not found")
-        print(self.wireColors)
 
     def ConnectWires(self):
         i = 0

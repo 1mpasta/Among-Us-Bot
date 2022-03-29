@@ -3,6 +3,7 @@ import keyboard
 
 from divertPower import DivertPower
 from download import Download
+from fuelEngines import FuelEngines
 from unlockManifolds import UnlockManifolds
 from startReactor import StartReactor
 from stabilizeSteering import StabilizeSteering
@@ -16,6 +17,7 @@ download = Download()
 reactor = StartReactor()
 manifolds = UnlockManifolds()
 divertPower = DivertPower()
+fuelEngines = FuelEngines()
 
 # region main
 sleep(1)
@@ -35,4 +37,6 @@ while keyboard.is_pressed("0") != True:
         manifolds.DoTask()
     if divertPowerAccept.CheckTask():
         divertPowerAccept.DoTask()
+    if fuelEngines.CheckTask():
+        fuelEngines.DoTask()
 # endregion

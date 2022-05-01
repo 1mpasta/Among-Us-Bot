@@ -11,6 +11,7 @@ from startReactor import StartReactor
 from stabilizeSteering import StabilizeSteering
 from wires import Wires
 from acceptDivertedPower import DivertPowerAccept
+from sabotageO2 import SabotageO2
 
 screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
@@ -22,6 +23,7 @@ reactor = StartReactor(screenSize)
 manifolds = UnlockManifolds(screenSize)
 divertPower = DivertPower(screenSize)
 fuelEngines = FuelEngines(screenSize)
+sabotageO2 = SabotageO2(screenSize)
 
 taskList = [
     wires,
@@ -31,7 +33,8 @@ taskList = [
     download,
     reactor,
     manifolds,
-    fuelEngines
+    fuelEngines,
+    sabotageO2
 ]
 
 # region main

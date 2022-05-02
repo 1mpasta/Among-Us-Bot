@@ -30,36 +30,36 @@ class Wires(Task):
     def GetWireColors(self):
         self.wireOrder.clear()
         screenshot = ImageGrab.grab()
-        
+
         for color in self.wireColors:
             for i, wire in enumerate(self.wiresYPositons):
                 pixel = screenshot.getpixel((self.wiresLeft, wire))
                 if self.vision.PixelMatchesColor(pixel, color):
                     self.wireOrder.append(i)
                     break
-                    
+
         if len(self.wireOrder) < 4:
-            print("ERROR: wires not found")
+            print(f"ERROR: wires not found | {self.wireOrder} {len(self.wireOrder)}")
 
     def ConnectWires(self):
         for i, wire in enumerate(self.wireOrder):
-            win32api.SetCursorPos((self.wiresLeft, self.wiresYPositons[i]))
+            win32api.SetCursorPos((self.wiresLeft, self.wiresYPositons[wire]))
             sleep(0.01)
-            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, self.wiresLeft, self.wiresYPositons[i])
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
             sleep(0.02)
-            win32api.SetCursorPos((self.wiresRight, self.wiresYPositons[wire]))
+            win32api.SetCursorPos((self.wiresRight, self.wiresYPositons[i]))
             sleep(0.02)
-            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, self.wiresRight, self.wiresYPositons[wire])
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
             sleep(0.01)
 
     def DoTask(self):
         self.GetWireColors()
         self.ConnectWires()
         keyboard.press_and_release("esc")
+        sleep(0.01)
 
     def CheckTask(self, screenshot):
-        pixel = screenshot.getpixel((int(round(
-            self.screenSize[0] * 0.7328125)), int(round(self.screenSize[1] * 0.237962962962963))))
+        pixel = screenshot.getpixel((int(round(self.screenSize[0] * 0.7328125)), int(round(self.screenSize[1] * 0.237962962962963))))
         if self.vision.PixelMatchesColor(pixel, (165, 0, 0)):
             return True
         return False

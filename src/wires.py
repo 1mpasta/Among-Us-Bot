@@ -38,9 +38,6 @@ class Wires(Task):
                     self.wireOrder.append(i)
                     break
 
-        if len(self.wireOrder) < 4:
-            print(f"ERROR: wires not found | {self.wireOrder} {len(self.wireOrder)}")
-
     def ConnectWires(self):
         for i, wire in enumerate(self.wireOrder):
             win32api.SetCursorPos((self.wiresLeft, self.wiresYPositons[wire]))
@@ -54,9 +51,10 @@ class Wires(Task):
 
     def DoTask(self):
         self.GetWireColors()
+        if len(self.wireOrder) < 4:
+            return
         self.ConnectWires()
         keyboard.press_and_release("esc")
-        sleep(0.01)
 
     def CheckTask(self, screenshot):
         pixel = screenshot.getpixel((int(round(self.screenSize[0] * 0.7328125)), int(round(self.screenSize[1] * 0.237962962962963))))

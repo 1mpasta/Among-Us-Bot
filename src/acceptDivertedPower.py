@@ -16,7 +16,7 @@ class DivertPowerAccept(Task):
         win32api.SetCursorPos((self.screenSize[0] // 2, self.screenSize[1] // 2))
         sleep(0.01)
         Task.Click()
-        sleep(1)
+        sleep(0.5)
         keyboard.press_and_release("esc")
 
     def CheckTask(self, screenshot):

@@ -12,6 +12,7 @@ from stabilizeSteering import StabilizeSteering
 from wires import Wires
 from acceptDivertedPower import DivertPowerAccept
 from sabotageO2 import SabotageO2
+from sabotageLights import SabotageLights
 
 screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
@@ -24,6 +25,7 @@ manifolds = UnlockManifolds(screenSize)
 divertPower = DivertPower(screenSize)
 fuelEngines = FuelEngines(screenSize)
 sabotageO2 = SabotageO2(screenSize)
+sabotageLights = SabotageLights(screenSize)
 
 taskList = [
     wires,
@@ -37,12 +39,22 @@ taskList = [
     sabotageO2
 ]
 
+impostorMode = False
+
 # region main
 sleep(1)
-while not keyboard.is_pressed("0"):
+while not keyboard.is_pressed("f12"):
     screenshot = ImageGrab.grab()
 
-    for task in taskList:
-        if task.CheckTask(screenshot):
-            task.DoTask()
+    if keyboard.is_pressed("f11"):
+        impostorMode = not impostorMode
+        sleep(0.1)
+
+    if not impostorMode:
+        for task in taskList:
+            if task.CheckTask(screenshot):
+                task.DoTask()
+
+    if sabotageLights.CheckTask(screenshot):
+        sabotageLights.DoTask(impostorMode)
 # endregion

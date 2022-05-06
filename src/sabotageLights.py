@@ -25,6 +25,7 @@ class SabotageLights(Task):
                 sleep(0.01)
                 Task.Click()
                 sleep(0.01)
+        sleep(0.15)
 
     def CheckTask(self, screenshot):
         pixel = screenshot.getpixel((int(round(self.screenSize[0] * 0.5208333333333333)), int(round(self.screenSize[1] * 0.0787037037037037))))

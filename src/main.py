@@ -13,6 +13,7 @@ from wires import Wires
 from acceptDivertedPower import DivertPowerAccept
 from sabotageO2 import SabotageO2
 from sabotageLights import SabotageLights
+from calibrateDistributor import CalibrateDistributor
 
 screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
@@ -26,6 +27,7 @@ divertPower = DivertPower(screenSize)
 fuelEngines = FuelEngines(screenSize)
 sabotageO2 = SabotageO2(screenSize)
 sabotageLights = SabotageLights(screenSize)
+calibrateDistributor = CalibrateDistributor(screenSize)
 
 taskList = [
     wires,
@@ -36,13 +38,15 @@ taskList = [
     reactor,
     manifolds,
     fuelEngines,
-    sabotageO2
+    sabotageO2,
+    calibrateDistributor
 ]
 
 impostorMode = False
 
 # region main
 sleep(1)
+print("Started")
 while not keyboard.is_pressed("f12"):
     screenshot = ImageGrab.grab()
 

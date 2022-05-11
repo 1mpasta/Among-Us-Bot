@@ -43,7 +43,7 @@ class SabotageO2(Task):
     def PreprocessForOCR(self, image):
         # convert to black and white
         gray = cv.cvtColor(np.array(image), cv.COLOR_RGB2GRAY)
-        _, imgBinary = cv.threshold(gray, 200, 255, cv.THRESH_BINARY)
+        _, imgBinary = cv.threshold(gray, 165, 255, cv.THRESH_BINARY)
         # fix rotation
         inverted = cv.bitwise_not(imgBinary)
         rotated = imutils.rotate(inverted, -25)

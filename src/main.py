@@ -56,6 +56,7 @@ while not keyboard.is_pressed("f12"):
 
     if not impostorMode:
         for task in taskList:
+            # sleep(0.5)
             if task.CheckTask(screenshot):
                 task.DoTask()
 

@@ -14,6 +14,7 @@ from acceptDivertedPower import DivertPowerAccept
 from sabotageO2 import SabotageO2
 from sabotageLights import SabotageLights
 from calibrateDistributor import CalibrateDistributor
+from primeShields import PrimeShields
 
 screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
@@ -28,6 +29,7 @@ fuelEngines = FuelEngines(screenSize)
 sabotageO2 = SabotageO2(screenSize)
 sabotageLights = SabotageLights(screenSize)
 calibrateDistributor = CalibrateDistributor(screenSize)
+primeShields = PrimeShields(screenSize)
 
 taskList = [
     wires,
@@ -39,7 +41,8 @@ taskList = [
     manifolds,
     fuelEngines,
     sabotageO2,
-    calibrateDistributor
+    calibrateDistributor,
+    primeShields
 ]
 
 impostorMode = False
@@ -56,7 +59,6 @@ while not keyboard.is_pressed("f12"):
 
     if not impostorMode:
         for task in taskList:
-            # sleep(0.5)
             if task.CheckTask(screenshot):
                 task.DoTask()
 

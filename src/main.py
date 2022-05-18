@@ -1,7 +1,9 @@
-from time import sleep
+import time
 import keyboard
 import win32api
-from PIL import ImageGrab
+from PIL import Image, ImageGrab
+import cv2 as cv
+import numpy as np
 
 from divertPower import DivertPower
 from download import Download
@@ -14,6 +16,7 @@ from acceptDivertedPower import DivertPowerAccept
 from sabotageO2 import SabotageO2
 from sabotageLights import SabotageLights
 from calibrateDistributor import CalibrateDistributor
+from swipeCard import SwipeCard
 
 screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
@@ -28,6 +31,7 @@ fuelEngines = FuelEngines(screenSize)
 sabotageO2 = SabotageO2(screenSize)
 sabotageLights = SabotageLights(screenSize)
 calibrateDistributor = CalibrateDistributor(screenSize)
+swipeCard = SwipeCard(screenSize)
 
 taskList = [
     wires,
@@ -39,25 +43,27 @@ taskList = [
     manifolds,
     fuelEngines,
     sabotageO2,
-    calibrateDistributor
+    calibrateDistributor,
+    swipeCard
 ]
 
 impostorMode = False
 
 # region main
-sleep(1)
+time.sleep(1)
 print("Started")
 while not keyboard.is_pressed("f12"):
     screenshot = ImageGrab.grab()
 
     if keyboard.is_pressed("f11"):
         impostorMode = not impostorMode
-        sleep(0.1)
+        time.sleep(0.1)
 
     if not impostorMode:
         for task in taskList:
-            # sleep(0.5)
             if task.CheckTask(screenshot):
+                # print(str(task))
+                # screenshot.save(f"TEST/{time.time()}.png")
                 task.DoTask()
 
     if sabotageLights.CheckTask(screenshot):

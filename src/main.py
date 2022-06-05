@@ -2,8 +2,6 @@ import time
 import keyboard
 import win32api
 from PIL import Image, ImageGrab
-import cv2 as cv
-import numpy as np
 
 from divertPower import DivertPower
 from download import Download
@@ -17,6 +15,7 @@ from sabotageO2 import SabotageO2
 from sabotageLights import SabotageLights
 from calibrateDistributor import CalibrateDistributor
 from swipeCard import SwipeCard
+from emptyGarbage import EmptyGarbage
 
 screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
@@ -32,6 +31,7 @@ sabotageO2 = SabotageO2(screenSize)
 sabotageLights = SabotageLights(screenSize)
 calibrateDistributor = CalibrateDistributor(screenSize)
 swipeCard = SwipeCard(screenSize)
+emptyGarbage = EmptyGarbage(screenSize)
 
 taskList = [
     wires,
@@ -44,7 +44,8 @@ taskList = [
     fuelEngines,
     sabotageO2,
     calibrateDistributor,
-    swipeCard
+    swipeCard,
+    emptyGarbage
 ]
 
 impostorMode = False

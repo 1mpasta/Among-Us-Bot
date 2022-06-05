@@ -18,7 +18,7 @@ class DivertPower(Task):
         self.slider = self.vision.ResizeToScreen(self.slider, screenSize, (0.0432291666666667, 0.0601851851851852))
 
     def DoTask(self):
-        sleep(0.02)
+        sleep(0.03)
 
         corner = (int(round(self.screenSize[0] * 0.3020833333333333)), int(round(self.screenSize[1] * 0.6972222222222222)))
         region = (corner[0], corner[1], corner[0] + int(round(self.screenSize[0] * 0.3958333333333333)), corner[1] + int(round(self.screenSize[1] * 0.062037037037037)))

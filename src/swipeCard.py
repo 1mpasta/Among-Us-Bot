@@ -1,5 +1,4 @@
 from task import Task
-from vision import Vision
 from time import sleep
 from PIL import ImageGrab
 import keyboard
@@ -9,25 +8,22 @@ import win32con
 
 class SwipeCard(Task):
 
-    def __init__(self, screenSize):
-        self.vision = Vision()
-        self.screenSize = screenSize
-
+    def __init__(self):
         self.swipeTime = 0.05
         self.segments = 25
-        self.startX = int(round(screenSize[0] * 0.2890625))
-        self.endX = int(round(screenSize[0] * 0.7552083333333333))
-        self.y = int(round(screenSize[1] * 0.3796296296296296))
+        self.startX = int(round(Task.screenSize[0] * 0.2890625))
+        self.endX = int(round(Task.screenSize[0] * 0.7552083333333333))
+        self.y = int(round(Task.screenSize[1] * 0.3796296296296296))
 
     def DoTask(self):
-        win32api.SetCursorPos((int(round(self.screenSize[0] * 0.390625)), int(round(self.screenSize[1] * 0.7962962962962963))))
+        win32api.SetCursorPos((int(round(Task.screenSize[0] * 0.390625)), int(round(Task.screenSize[1] * 0.7962962962962963))))
         sleep(0.01)
         Task.Click()
 
-        pixelPos = (int(round(self.screenSize[0] * 0.7005208333333333)), int(round(self.screenSize[1] * 0.3009259259259259)))
+        pixelPos = (int(round(Task.screenSize[0] * 0.7005208333333333)), int(round(Task.screenSize[1] * 0.3009259259259259)))
         screenshot = ImageGrab.grab()
         pixel = screenshot.getpixel(pixelPos)
-        while self.vision.PixelMatchesColor(pixel, (0, 99, 71)):
+        while Task.vision.PixelMatchesColor(pixel, (0, 99, 71)):
             screenshot = ImageGrab.grab()
             pixel = screenshot.getpixel(pixelPos)
 
@@ -44,8 +40,8 @@ class SwipeCard(Task):
         keyboard.press_and_release("esc")
 
     def CheckTask(self, screenshot):
-        pixel = screenshot.getpixel((int(round(self.screenSize[0] * 0.690625)), int(round(self.screenSize[1] * 0.1166666666666667))))
-        pixel2 = screenshot.getpixel((int(round(self.screenSize[0] * 0.6770833333333333)), int(round(self.screenSize[1] * 0.8611111111111111))))
-        if self.vision.PixelMatchesColor(pixel, (22, 74, 57)) and self.vision.PixelMatchesColor(pixel2, (71, 147, 52)):
+        pixel = screenshot.getpixel((int(round(Task.screenSize[0] * 0.690625)), int(round(Task.screenSize[1] * 0.1166666666666667))))
+        pixel2 = screenshot.getpixel((int(round(Task.screenSize[0] * 0.6770833333333333)), int(round(Task.screenSize[1] * 0.8611111111111111))))
+        if Task.vision.PixelMatchesColor(pixel, (22, 74, 57)) and Task.vision.PixelMatchesColor(pixel2, (71, 147, 52)):
             return True
         return False

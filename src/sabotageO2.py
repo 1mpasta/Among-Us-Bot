@@ -2,7 +2,6 @@ from time import sleep
 from task import Task
 import cv2 as cv
 import numpy as np
-from vision import Vision
 from PIL import ImageGrab
 from pytesseract import pytesseract
 import imutils
@@ -12,20 +11,17 @@ import win32api
 
 class SabotageO2(Task):
 
-    def __init__(self, screenSize):
-        self.vision = Vision()
-        self.screenSize = screenSize
-
+    def __init__(self):
         self.cols = [
-            int(round(self.screenSize[0] * 0.4140625)),
-            int(round(self.screenSize[0] * 0.4973958333333333)),
-            int(round(self.screenSize[0] * 0.5833333333333333))
+            int(round(Task.screenSize[0] * 0.4140625)),
+            int(round(Task.screenSize[0] * 0.4973958333333333)),
+            int(round(Task.screenSize[0] * 0.5833333333333333))
         ]
         self.rows = [
-            int(round(self.screenSize[1] * 0.3518518518518519)),
-            int(round(self.screenSize[1] * 0.5046296296296296)),
-            int(round(self.screenSize[1] * 0.6574074074074074)),
-            int(round(self.screenSize[1] * 0.8055555555555556))
+            int(round(Task.screenSize[1] * 0.3518518518518519)),
+            int(round(Task.screenSize[1] * 0.5046296296296296)),
+            int(round(Task.screenSize[1] * 0.6574074074074074)),
+            int(round(Task.screenSize[1] * 0.8055555555555556))
         ]
         self.buttonPositions = [
             (self.cols[1], self.rows[3]),
@@ -55,10 +51,10 @@ class SabotageO2(Task):
         return imgBorder
 
     def DoTask(self):
-        x1 = int(round(self.screenSize[0] * 0.646875))
-        y1 = int(round(self.screenSize[1] * 0.2722222222222222))
-        x2 = int(round(self.screenSize[0] * 0.6958333333333333))
-        y2 = int(round(self.screenSize[1] * 0.3287037037037037))
+        x1 = int(round(Task.screenSize[0] * 0.646875))
+        y1 = int(round(Task.screenSize[1] * 0.2722222222222222))
+        x2 = int(round(Task.screenSize[0] * 0.6958333333333333))
+        y2 = int(round(Task.screenSize[1] * 0.3287037037037037))
 
         screenshot = ImageGrab.grab((x1, y1, x2, y2))
         screenshot = self.PreprocessForOCR(screenshot)
@@ -78,7 +74,7 @@ class SabotageO2(Task):
         keyboard.press_and_release("esc")
 
     def CheckTask(self, screenshot):
-        pixel = screenshot.getpixel((int(round(self.screenSize[0] * 0.7322916666666667)), int(round(self.screenSize[1] * 0.4009259259259259))))
-        if self.vision.PixelMatchesColor(pixel, (181, 165, 68)):
+        pixel = screenshot.getpixel((int(round(Task.screenSize[0] * 0.7322916666666667)), int(round(Task.screenSize[1] * 0.4009259259259259))))
+        if Task.vision.PixelMatchesColor(pixel, (181, 165, 68)):
             return True
         return False

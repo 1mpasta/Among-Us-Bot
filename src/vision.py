@@ -7,7 +7,7 @@ class Vision():
 
         result = cv.matchTemplate(haystack, needle, method)
 
-        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+        _, _, _, max_loc = cv.minMaxLoc(result)
         clickPoint = (max_loc[0] + int(needle.shape[1] / 2), max_loc[1] + int(needle.shape[0] / 2))
 
         return clickPoint
@@ -18,7 +18,7 @@ class Vision():
         greenOk = True if pixel[1] == rgb[1] or pixel[1] in range(g - 1, g + 2) else False
         b = max(int(round(rgb[2] * 0.62162162162162)), 0)
         blueOk = True if pixel[2] == rgb[2] or pixel[2] in range(b - 1, b + 2) else False
-        allOk = True if redOk == greenOk == blueOk == True else False
+        allOk = True if redOk and greenOk and blueOk else False
         if allOk:
             return True
         return False

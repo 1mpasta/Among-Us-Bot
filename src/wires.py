@@ -3,21 +3,18 @@ import keyboard
 import win32api
 import win32con
 from task import Task
-from vision import Vision
 from PIL import ImageGrab
 
 
 class Wires(Task):
 
-    def __init__(self, screenSize):
-        self.vision = Vision()
-        self.screenSize = screenSize
-        self.wiresLeft, self.wiresRight = int(round(screenSize[0] * 0.2942708333333333)), int(round(screenSize[0] * 0.6901041666666667))
+    def __init__(self):
+        self.wiresLeft, self.wiresRight = int(round(Task.screenSize[0] * 0.2942708333333333)), int(round(Task.screenSize[0] * 0.6901041666666667))
         self.wiresYPositons = [
-            int(round(screenSize[1] * 0.25)),
-            int(round(screenSize[1] * 0.4259259259259259)),
-            int(round(screenSize[1] * 0.5972222222222222)),
-            int(round(screenSize[1] * 0.7685185185185185))
+            int(round(Task.screenSize[1] * 0.25)),
+            int(round(Task.screenSize[1] * 0.4259259259259259)),
+            int(round(Task.screenSize[1] * 0.5972222222222222)),
+            int(round(Task.screenSize[1] * 0.7685185185185185))
         ]
         self.wireColors = [
             (255, 0, 0),
@@ -34,7 +31,7 @@ class Wires(Task):
         for color in self.wireColors:
             for i, wire in enumerate(self.wiresYPositons):
                 pixel = screenshot.getpixel((self.wiresLeft, wire))
-                if self.vision.PixelMatchesColor(pixel, color):
+                if Task.vision.PixelMatchesColor(pixel, color):
                     self.wireOrder.append(i)
                     break
 
@@ -57,7 +54,7 @@ class Wires(Task):
         keyboard.press_and_release("esc")
 
     def CheckTask(self, screenshot):
-        pixel = screenshot.getpixel((int(round(self.screenSize[0] * 0.7328125)), int(round(self.screenSize[1] * 0.237962962962963))))
-        if self.vision.PixelMatchesColor(pixel, (165, 0, 0)):
+        pixel = screenshot.getpixel((int(round(Task.screenSize[0] * 0.7328125)), int(round(Task.screenSize[1] * 0.237962962962963))))
+        if Task.vision.PixelMatchesColor(pixel, (165, 0, 0)):
             return True
         return False

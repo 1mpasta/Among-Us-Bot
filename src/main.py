@@ -1,7 +1,6 @@
 import time
 import keyboard
-import win32api
-from PIL import Image, ImageGrab
+from PIL import ImageGrab
 
 from divertPower import DivertPower
 from download import Download
@@ -17,21 +16,20 @@ from calibrateDistributor import CalibrateDistributor
 from swipeCard import SwipeCard
 from emptyGarbage import EmptyGarbage
 
-screenSize = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 
-wires = Wires(screenSize)
-divertPowerAccept = DivertPowerAccept(screenSize)
-stabilizeSteering = StabilizeSteering(screenSize)
-download = Download(screenSize)
-reactor = StartReactor(screenSize)
-manifolds = UnlockManifolds(screenSize)
-divertPower = DivertPower(screenSize)
-fuelEngines = FuelEngines(screenSize)
-sabotageO2 = SabotageO2(screenSize)
-sabotageLights = SabotageLights(screenSize)
-calibrateDistributor = CalibrateDistributor(screenSize)
-swipeCard = SwipeCard(screenSize)
-emptyGarbage = EmptyGarbage(screenSize)
+wires = Wires()
+divertPowerAccept = DivertPowerAccept()
+stabilizeSteering = StabilizeSteering()
+download = Download()
+reactor = StartReactor()
+manifolds = UnlockManifolds()
+divertPower = DivertPower()
+fuelEngines = FuelEngines()
+sabotageO2 = SabotageO2()
+sabotageLights = SabotageLights()
+calibrateDistributor = CalibrateDistributor()
+swipeCard = SwipeCard()
+emptyGarbage = EmptyGarbage()
 
 taskList = [
     wires,

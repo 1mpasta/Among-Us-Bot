@@ -15,6 +15,7 @@ from sabotageLights import SabotageLights
 from calibrateDistributor import CalibrateDistributor
 from swipeCard import SwipeCard
 from emptyGarbage import EmptyGarbage
+from chartCourse import ChartCourse
 
 
 wires = Wires()
@@ -30,6 +31,7 @@ sabotageLights = SabotageLights()
 calibrateDistributor = CalibrateDistributor()
 swipeCard = SwipeCard()
 emptyGarbage = EmptyGarbage()
+chartCourse = ChartCourse()
 
 taskList = [
     wires,
@@ -43,7 +45,8 @@ taskList = [
     sabotageO2,
     calibrateDistributor,
     swipeCard,
-    emptyGarbage
+    emptyGarbage,
+    chartCourse
 ]
 
 impostorMode = False

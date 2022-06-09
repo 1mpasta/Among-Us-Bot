@@ -1,73 +1,73 @@
 import time
+
 import keyboard
 from PIL import ImageGrab
 
+from acceptDivertedPower import DivertPowerAccept
+from calibrateDistributor import CalibrateDistributor
+from chartCourse import ChartCourse
 from divertPower import DivertPower
 from download import Download
-from fuelEngines import FuelEngines
-from unlockManifolds import UnlockManifolds
-from startReactor import StartReactor
-from stabilizeSteering import StabilizeSteering
-from wires import Wires
-from acceptDivertedPower import DivertPowerAccept
-from sabotageO2 import SabotageO2
-from sabotageLights import SabotageLights
-from calibrateDistributor import CalibrateDistributor
-from swipeCard import SwipeCard
 from emptyGarbage import EmptyGarbage
-from chartCourse import ChartCourse
+from fuelEngines import FuelEngines
+from sabotageLights import SabotageLights
+from sabotageO2 import SabotageO2
+from stabilizeSteering import StabilizeSteering
+from startReactor import StartReactor
+from swipeCard import SwipeCard
+from unlockManifolds import UnlockManifolds
+from wires import Wires
 
-
-wires = Wires()
 divertPowerAccept = DivertPowerAccept()
-stabilizeSteering = StabilizeSteering()
-download = Download()
-reactor = StartReactor()
-manifolds = UnlockManifolds()
-divertPower = DivertPower()
-fuelEngines = FuelEngines()
-sabotageO2 = SabotageO2()
-sabotageLights = SabotageLights()
 calibrateDistributor = CalibrateDistributor()
-swipeCard = SwipeCard()
-emptyGarbage = EmptyGarbage()
 chartCourse = ChartCourse()
+divertPower = DivertPower()
+download = Download()
+emptyGarbage = EmptyGarbage()
+fuelEngines = FuelEngines()
+sabotageLights = SabotageLights()
+sabotageO2 = SabotageO2()
+stabilizeSteering = StabilizeSteering()
+startReactor = StartReactor()
+swipeCard = SwipeCard()
+unlockManifolds = UnlockManifolds()
+wires = Wires()
 
 taskList = [
-    wires,
-    divertPower,
     divertPowerAccept,
-    stabilizeSteering,
+    calibrateDistributor,
+    chartCourse,
+    divertPower,
     download,
-    reactor,
-    manifolds,
+    emptyGarbage,
     fuelEngines,
     sabotageO2,
-    calibrateDistributor,
+    stabilizeSteering,
+    startReactor,
     swipeCard,
-    emptyGarbage,
-    chartCourse
+    unlockManifolds,
+    wires
 ]
+def main():
+    impostor_mode = False
 
-impostorMode = False
+    time.sleep(1)
+    print("Started")
+    while not keyboard.is_pressed("f12"):
+        screenshot = ImageGrab.grab()
 
-# region main
-time.sleep(1)
-print("Started")
-while not keyboard.is_pressed("f12"):
-    screenshot = ImageGrab.grab()
+        if keyboard.is_pressed("f11"):
+            impostor_mode = not impostor_mode
+            time.sleep(0.1)
 
-    if keyboard.is_pressed("f11"):
-        impostorMode = not impostorMode
-        time.sleep(0.1)
+        if not impostor_mode:
+            for task in taskList:
+                if task.check_task(screenshot):
+                    # screenshot.save(f"TEST/{task.__class__.__name__}{time.time()}.png")
+                    task.do_task()
 
-    if not impostorMode:
-        for task in taskList:
-            if task.CheckTask(screenshot):
-                # print(str(task))
-                # screenshot.save(f"TEST/{time.time()}.png")
-                task.DoTask()
+        if sabotageLights.check_task(screenshot):
+            sabotageLights.do_task(impostor_mode)
 
-    if sabotageLights.CheckTask(screenshot):
-        sabotageLights.DoTask(impostorMode)
-# endregion
+if __name__ == "__main__":
+    main()

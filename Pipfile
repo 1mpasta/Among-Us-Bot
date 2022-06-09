@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+keyboard = "*"
+pillow = "*"
+numpy = "*"
+pywin32 = "*"
+pytesseract = "*"
+imutils = "*"
+pyautogui = "*"
+opencv-python = "==4.5.5.64"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

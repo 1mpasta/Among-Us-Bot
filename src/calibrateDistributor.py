@@ -1,53 +1,55 @@
-from task import Task
 from time import sleep
-from PIL import ImageGrab
+
 import keyboard
 import win32api
+from PIL import ImageGrab
+
+from task import Task
+from utility import Utility
 
 
 class CalibrateDistributor(Task):
-
     def __init__(self):
-        self.x = int(round(Task.screenSize[0] * 0.6380208333333333))
-        self.screenY = int(round(Task.screenSize[1] * 0.212962962962963))
-        self.buttonY = int(round(Task.screenSize[1] * 0.2962962962962963))
-        self.screenMultiplier = int(round(Task.screenSize[1] * 0.25))
-        self.buttonMultiplier = int(round(Task.screenSize[1] * 0.2407407407407407))
+        self.x = int(round(Utility.screenSize[0] * 0.6380208333333333))
+        self.screen_y = int(round(Utility.screenSize[1] * 0.212962962962963))
+        self.button_y = int(round(Utility.screenSize[1] * 0.2962962962962963))
+        self.screen_multiplier = int(round(Utility.screenSize[1] * 0.25))
+        self.button_multiplier = int(round(Utility.screenSize[1] * 0.2407407407407407))
 
-    def DoTask(self):
+    def do_task(self):
         screenshot = ImageGrab.grab()
 
-        pixel = screenshot.getpixel((self.x, self.screenY))
-        while Task.vision.PixelMatchesColor(pixel, (0, 0, 0)):
+        pixel = screenshot.getpixel((self.x, self.screen_y))
+        while Utility.pixel_matches_color(pixel, (0, 0, 0)):
             screenshot = ImageGrab.grab()
-            pixel = screenshot.getpixel((self.x, self.screenY))
+            pixel = screenshot.getpixel((self.x, self.screen_y))
 
-        win32api.SetCursorPos((self.x, self.buttonY))
+        win32api.SetCursorPos((self.x, self.button_y))
         sleep(0.01)
-        Task.Click()
+        Utility.click()
 
-        pixel = screenshot.getpixel((self.x, self.screenY + self.screenMultiplier))
-        while Task.vision.PixelMatchesColor(pixel, (0, 0, 0)):
+        pixel = screenshot.getpixel((self.x, self.screen_y + self.screen_multiplier))
+        while Utility.pixel_matches_color(pixel, (0, 0, 0)):
             screenshot = ImageGrab.grab()
-            pixel = screenshot.getpixel((self.x, self.screenY + self.screenMultiplier))
+            pixel = screenshot.getpixel((self.x, self.screen_y + self.screen_multiplier))
 
-        win32api.SetCursorPos((self.x, self.buttonY + self.buttonMultiplier))
+        win32api.SetCursorPos((self.x, self.button_y + self.button_multiplier))
         sleep(0.01)
-        Task.Click()
+        Utility.click()
 
-        pixel = screenshot.getpixel((self.x, self.screenY + (self.screenMultiplier * 2)))
-        while Task.vision.PixelMatchesColor(pixel, (0, 0, 0)):
+        pixel = screenshot.getpixel((self.x, self.screen_y + (self.screen_multiplier * 2)))
+        while Utility.pixel_matches_color(pixel, (0, 0, 0)):
             screenshot = ImageGrab.grab()
-            pixel = screenshot.getpixel((self.x, self.screenY + (self.screenMultiplier * 2)))
+            pixel = screenshot.getpixel((self.x, self.screen_y + (self.screen_multiplier * 2)))
 
-        win32api.SetCursorPos((self.x, self.buttonY + (self.buttonMultiplier * 2)))
+        win32api.SetCursorPos((self.x, self.button_y + (self.button_multiplier * 2)))
         sleep(0.01)
-        Task.Click()
+        Utility.click()
         sleep(0.01)
         keyboard.press_and_release("esc")
 
-    def CheckTask(self, screenshot):
-        pixel = screenshot.getpixel((int(round(Task.screenSize[0] * 0.5828125)), int(round(Task.screenSize[1] * 0.1962962962962963))))
-        if Task.vision.PixelMatchesColor(pixel, (255, 227, 0)):
+    def check_task(self, screenshot):
+        pixel = screenshot.getpixel((int(round(Utility.screenSize[0] * 0.5828125)), int(round(Utility.screenSize[1] * 0.1962962962962963))))
+        if Utility.pixel_matches_color(pixel, (255, 227, 0)):
             return True
         return False

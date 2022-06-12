@@ -10,7 +10,6 @@ numpy = "*"
 pywin32 = "*"
 pytesseract = "*"
 imutils = "*"
-pyautogui = "*"
 opencv-python = "==4.5.5.64"
 
 [dev-packages]

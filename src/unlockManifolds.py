@@ -3,8 +3,8 @@ from time import sleep
 import cv2 as cv
 import keyboard
 import numpy as np
-import pyautogui
 import win32api
+from PIL import ImageGrab
 
 from task import Task
 from utility import Utility
@@ -22,9 +22,9 @@ class UnlockManifolds(Task):
         x1 = int(round(Utility.screenSize[0] * 0.3020833333333333))
         y1 = int(round(Utility.screenSize[1] * 0.3601851851851852))
         x2 = int(round(Utility.screenSize[0] * 0.6979166666666667))
-        y2 = int(round(Utility.screenSize[1] * 0.6398148148148148))
+        y2 = int(round(Utility.screenSize[1] * 0.6388888888888889))
 
-        screenshot = pyautogui.screenshot(region=(x1, y1, x2, y2))
+        screenshot = ImageGrab.grab((x1, y1, x2, y2))
         screenshot = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
         for number in self.numbers:
             click_point = Utility.get_location_from_image(number, screenshot)

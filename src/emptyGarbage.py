@@ -22,6 +22,7 @@ class EmptyGarbage(Task):
 
     def check_task(self, screenshot):
         pixel = screenshot.getpixel((int(round(Utility.screenSize[0] * 0.625)), int(round(Utility.screenSize[1] * 0.4675925925925926))))
-        if Utility.pixel_matches_color(pixel, (145, 175, 187)):
+        pixel2 = screenshot.getpixel((int(round(Utility.screenSize[0] * 0.6526041666666667)), int(round(Utility.screenSize[1] * 0.525))))
+        if Utility.pixel_matches_color(pixel, (145, 175, 187)) and Utility.pixel_matches_color(pixel2, (24, 36, 35)):
             return True
         return False

@@ -13,6 +13,7 @@ from divertPower import DivertPower
 from download import Download
 from emptyGarbage import EmptyGarbage
 from fuelEngines import FuelEngines
+from inspectSample import InspectSample
 from sabotageLights import SabotageLights
 from sabotageO2 import SabotageO2
 from stabilizeSteering import StabilizeSteering
@@ -29,6 +30,7 @@ divertPower = DivertPower()
 download = Download()
 emptyGarbage = EmptyGarbage()
 fuelEngines = FuelEngines()
+inspectSample = InspectSample()
 sabotageLights = SabotageLights()
 sabotageO2 = SabotageO2()
 stabilizeSteering = StabilizeSteering()
@@ -45,6 +47,7 @@ taskList = [
     download,
     emptyGarbage,
     fuelEngines,
+    inspectSample,
     sabotageO2,
     stabilizeSteering,
     startReactor,

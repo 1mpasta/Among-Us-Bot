@@ -12,6 +12,7 @@ from chartCourse import ChartCourse
 from divertPower import DivertPower
 from download import Download
 from emptyGarbage import EmptyGarbage
+from enterIdCode import EnterIdCode
 from fuelEngines import FuelEngines
 from inspectSample import InspectSample
 from sabotageLights import SabotageLights
@@ -29,6 +30,7 @@ chartCourse = ChartCourse()
 divertPower = DivertPower()
 download = Download()
 emptyGarbage = EmptyGarbage()
+enterIdCode = EnterIdCode()
 fuelEngines = FuelEngines()
 inspectSample = InspectSample()
 sabotageLights = SabotageLights()
@@ -46,6 +48,7 @@ taskList = [
     divertPower,
     download,
     emptyGarbage,
+    enterIdCode,
     fuelEngines,
     inspectSample,
     sabotageO2,
